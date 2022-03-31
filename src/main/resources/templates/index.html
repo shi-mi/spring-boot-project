@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee management system</title>
+    
+</head>
+<body>
+<center>
+    <h2>Employee management system</h2>
+    <p>
+       <div th:switch="${employees}">
+    <h2 th:case="null">No employees yet!</h2>
+        <div th:case="*">
+            <h2>Employees</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.firstName}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td><a th:href="@{/api/edit/{id}(id=${employee.emp_id})}">Edit</a></td>
+                    <td><a th:href="@{/api/deleteemployee/{id}(id=${employee.emp_id})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="/api/addnew">Add a new employee</a></p>
+    </center>
+</div>
+
+       
+    </p>
+</body>
+</html>
